@@ -1,3 +1,19 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
+.library {
+  display: flex;
+}
+
+.book {
+  flex: 0 1 22%;
+  padding: 10px;
+  margin: 1%;
+  border: 1px solid black;
+}
+.book .pages {
+  display: block;
+}
 
 /*# sourceMappingURL=style.css.map */

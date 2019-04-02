@@ -1,0 +1,39 @@
+
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+
+
+.library {
+  display: flex;
+}
+
+.book {
+  flex: 0 1 22%;
+  padding: 10px;
+  margin: 1%;
+  border: 1px solid black;
+
+  .title {
+
+  }
+
+  .author{
+
+  }
+
+  .pages{
+    display: block;
+  }
+
+  .read-checkbox{
+  }
+
+  .read-label {
+  }
+
+  .remote-btn {
+  }
+}
