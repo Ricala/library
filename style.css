@@ -17,6 +17,8 @@
   align-content: center;
   justify-items: center;
   align-items: center;
+  background-color: rgba(128, 128, 128, 0.397);
+  margin-right: 10px;
 }
 
 .new-book {
@@ -92,12 +94,44 @@
   border-bottom: 1px solid white;
   padding-bottom: 2px;
 }
+.book .read-btn-both {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.082);
+  margin-top: 5px;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+.book .read-btn-both:active {
+  outline: none;
+  border-radius: 25px;
+  border: 2px white solid;
+}
+.book .read-btn-both:hover {
+  cursor: pointer;
+}
 .book .read-btn {
-  color: red;
-  background-color: blue;
+  background-color: rgba(0, 255, 76, 0.295);
+  border: 2px solid green;
+}
+.book .not-read-btn {
+  background-color: rgba(255, 166, 0, 0.541);
+  border: 2px solid orange;
 }
 .book .remove-btn {
   margin-top: 0.5rem;
+  font-size: 1.8rem;
+  margin-left: auto;
+  font-weight: 500;
+  border-radius: 100%;
+  border: 1px solid white;
+  padding: 0 10px;
+  background-color: rgba(255, 0, 0, 0.534);
+}
+.book .remove-btn:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

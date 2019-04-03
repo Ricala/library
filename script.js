@@ -94,13 +94,15 @@ function render() {
     readBox.className = "read-box";
 
 
-    let readBtn = document.createElement('button')
+    let readBtn = document.createElement('button');
+    readBtn.className="read-btn-both";
+
     if(book.read){
-      readBtn.className = "read-btn";
-      readBtn.appendChild(document.createTextNode("Read"));
+      readBtn.className = "read-btn read-btn-both";
+      readBtn.appendChild(document.createTextNode("READ"));
     } else{
-      readBtn.className = "not-read-btn";
-      readBtn.appendChild(document.createTextNode("Not read"));
+      readBtn.className = "not-read-btn read-btn-both";
+      readBtn.appendChild(document.createTextNode("NOT READ"));
     };
     eachBook.appendChild(readBtn);
 
@@ -109,7 +111,7 @@ function render() {
 
     let removeBook = document.createElement("button");
     removeBook.className = "remove-btn";
-    removeBook.appendChild(document.createTextNode("Delete Book"));
+    removeBook.appendChild(document.createTextNode("🗑️"));
     eachBook.appendChild(removeBook);
     removeBook.onclick = () => deleteBook(index);
 
