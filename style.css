@@ -5,6 +5,8 @@
 .container {
   display: grid;
   grid-template-columns: 7fr 1fr;
+  font-weight: 100;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .library {
@@ -12,7 +14,9 @@
   grid-row-start: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
 }
 
 .new-book {
@@ -37,6 +41,12 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: white;
+  background-image: linear-gradient(to right, black 1%, #c5f1e4 10%, #066d85);
+  box-shadow: 3px 3px #3a3939;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  border-radius: 5px;
 }
 .book * {
   margin: 0;
@@ -44,20 +54,57 @@
 }
 .book .title {
   max-width: 200px;
+  min-width: 150px;
   overflow-wrap: break-word;
   font-size: 1.8rem;
+  line-height: 2.5rem;
+  font-family: "Arima Madurai", cursive;
   margin-top: auto;
+  background-image: linear-gradient(black, rgba(22, 22, 22, 0.966));
+  padding: 5px 8px;
+  border: 2px solid #a8e6e6;
+  border-bottom: 1px solid #fcfcfc;
+  text-shadow: 2px 2px #29323f;
+  border-radius: 10px;
 }
 .book .author {
   max-width: 200px;
+  min-width: 50px;
   overflow-wrap: break-word;
-  margin-top: auto;
+  margin-top: 2px;
+  font-weight: 100;
+  padding: 2px 4px;
+  padding: 5px 8px;
+  color: black;
+  text-shadow: 2px 2px white;
+  background-color: rgba(255, 255, 255, 0.918);
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-weight: 900;
+  border-bottom: 2px solid #063b3f;
 }
 .book .pages {
   margin-top: auto;
+  color: black;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-bottom: 1px solid white;
+  padding-bottom: 2px;
 }
 .book .read-box {
   margin-top: auto;
+  display: flex;
+  align-items: center;
+}
+.book .read-box .read-label {
+  padding: 5px 15px;
+  color: black;
+  font-size: 1.3rem;
+  border-bottom: 1px solid white;
+}
+.book .read-box input[type=checkbox] {
+  transform: scale(1.6);
 }
 .book .remove-btn {
   margin-top: 0.5rem;

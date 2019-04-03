@@ -2,6 +2,7 @@
 let myLibrary = [];
 const library = document.querySelector(".library");
 const submitBtn = document.getElementById("submit-btn");
+const readBtn = document.getElementsByClassName("read-btn")
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
@@ -25,6 +26,7 @@ submitBtn.addEventListener ('click' , function () {
   clearInputs();
 });
 
+
 function Book(title, author, pages, read){
   this.title = title;
   this.author = author;
@@ -36,6 +38,14 @@ function deleteBook(book) {
 console.log("button works");
 myLibrary.splice(book, 1);
 render();
+}
+
+function switchRead(read) {
+  if(read){
+    return false;
+  } else{
+    return true;
+  };
 }
 
 function addBookToLibrary(book) {
@@ -82,26 +92,19 @@ function render() {
     let readBox = document.createElement('div');
     readBox.className = "read-box";
 
-    let readLabel = document.createElement('label');
-    readLabel.className = "read-label"
-    readLabel.htmlfor = "read";
-    readLabel.appendChild(document.createTextNode("Read"));
-    readBox.appendChild(readLabel);
 
-    let readCheck = document.createElement("INPUT");
-    readCheck.className = "read-checkbox";
-    readCheck.type = "checkbox";
-    readCheck.name = "read";
-    readCheck.value = "read";
-    readCheck.id = "read";
+    let readBtn = document.createElement('button')
+    readBtn.className = "read-btn";
     if(book.read){
-      readCheck.checked = true;
-    } else {
-      readCheck.checked = false;
-    }
-    readBox.appendChild(readCheck);
+      readBtn.value = "read";
+    } else{
+      readBtn.value = "not-read";
+    };
+    readBtn.appendChild(document.createTextNode(readBtn.value));
+    eachBook.appendChild(readBtn);
 
-    eachBook.appendChild(readBox);
+    readBtn.onclick = () => book.read = switchRead(book.read);
+      
 
     let removeBook = document.createElement("button");
     removeBook.className = "remove-btn";
