@@ -101,22 +101,9 @@ $font-family:'Arima Madurai', cursive;
     padding-bottom: 2px;
   }
 
-  .read-box {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-
-    .read-label {
-      padding: 5px 15px;
-      color: black;
-      font-size: 1.3rem;
-      border-bottom: 1px solid white;
-    }
-
-    input[type=checkbox] {
-      transform: scale(1.6);
-    }
-
+  .read-btn {
+    color: red;
+    background-color: blue;
   }
 
   .remove-btn {

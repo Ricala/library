@@ -40,12 +40,13 @@ myLibrary.splice(book, 1);
 render();
 }
 
-function switchRead(read) {
+function switchRead(book, read) {
   if(read){
-    return false;
+    book.read = false;
   } else{
-    return true;
+    book.read = true;
   };
+  render();
 }
 
 function addBookToLibrary(book) {
@@ -94,16 +95,16 @@ function render() {
 
 
     let readBtn = document.createElement('button')
-    readBtn.className = "read-btn";
     if(book.read){
-      readBtn.value = "read";
+      readBtn.className = "read-btn";
+      readBtn.appendChild(document.createTextNode("Read"));
     } else{
-      readBtn.value = "not-read";
+      readBtn.className = "not-read-btn";
+      readBtn.appendChild(document.createTextNode("Not read"));
     };
-    readBtn.appendChild(document.createTextNode(readBtn.value));
     eachBook.appendChild(readBtn);
 
-    readBtn.onclick = () => book.read = switchRead(book.read);
+    readBtn.onclick = () => switchRead(book, book.read);
       
 
     let removeBook = document.createElement("button");

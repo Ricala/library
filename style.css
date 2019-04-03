@@ -92,19 +92,9 @@
   border-bottom: 1px solid white;
   padding-bottom: 2px;
 }
-.book .read-box {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-}
-.book .read-box .read-label {
-  padding: 5px 15px;
-  color: black;
-  font-size: 1.3rem;
-  border-bottom: 1px solid white;
-}
-.book .read-box input[type=checkbox] {
-  transform: scale(1.6);
+.book .read-btn {
+  color: red;
+  background-color: blue;
 }
 .book .remove-btn {
   margin-top: 0.5rem;
