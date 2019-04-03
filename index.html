@@ -6,8 +6,30 @@
 
 <body>
   <h1>Ricala's Library</h1>
-  <div class="library">
+  <div class="new-book">
+    <button class="new-book-btn">Add a new Book</button>
 
+    <form id="new-book-form" action="" method="post">
+      <label for="title">Book Title:</label>
+      <input type="text" name="title" id="title" placeholder="Harry Potter">
+      
+      <label for="author">Author:</label> 
+      <input type="text" name="author" id="author" placeholder="J.K. Rowling">
+      
+      <label for="pages">Pages:</label>
+      <input type="text" name="pages" id="pages" placeholder="123">
+      
+      <input type="radio" name="read" id="book-read" value="read" >
+      <label for="read">Read</label>
+      <input type="radio" name="read" id="book-not-read" value="not-read" checked>
+      <label for="not-read">Not Read</label>
+
+      <button id="submit-btn" type="button" form="new-book-form" value="post">Add Book</button>
+    </form>
+
+  </div>  
+  <div class="library">
+  
   </div>
   <script src="script.js"></script>
 </body>

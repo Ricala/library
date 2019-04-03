@@ -1,6 +1,29 @@
-let title, author, pages, read;
+
 let myLibrary = [];
-const library = document.querySelector(".library")
+const library = document.querySelector(".library");
+const submitBtn = document.getElementById("submit-btn");
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
+const notRead = document.getElementById("book-not-read");
+const read = document.getElementById("book-read");
+
+submitBtn.addEventListener ('click' , function () {
+  if(title.value == "" || author.value == "" || pages.value == "") {
+    alert("Please enter a value for each field");
+    return;
+  }
+
+  let isRead = false;
+  if(read.checked){
+    isRead = true;
+  }
+
+  let createdBook = new Book(title.value, author.value, pages.value, isRead);
+  addBookToLibrary(createdBook);
+  render();
+  clearInputs();
+});
 
 function Book(title, author, pages, read){
   this.title = title;
@@ -19,6 +42,13 @@ function deleteBook(book) {
 console.log("button works");
 myLibrary.splice(book, 1);
 render();
+}
+
+function clearInputs() {
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  notRead.checked = true;
 }
 
 let theHobbit = new Book('dog','mom',234,true);
