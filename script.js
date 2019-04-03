@@ -32,16 +32,15 @@ function Book(title, author, pages, read){
   this.read = read;
 };
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-  console.log(book.title);
-}
-
-
 function deleteBook(book) {
 console.log("button works");
 myLibrary.splice(book, 1);
 render();
+}
+
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+  console.log(book.title);
 }
 
 function clearInputs() {
@@ -53,8 +52,10 @@ function clearInputs() {
 
 let theHobbit = new Book('dog','mom',234,true);
 let theDog = new Book('bog','mom',234,false);
+let theFog = new Book('bog55bog55bog55bog55bog55bog55bog55bog55bog55bog55','momttmomttmomttmomttmomtt',235554,false);
 addBookToLibrary(theHobbit);
 addBookToLibrary(theDog);
+addBookToLibrary(theFog);
 
 function render() {
   library.innerHTML = "";
@@ -89,13 +90,13 @@ function render() {
     } else {
       readCheck.checked = false;
     }
+    eachBook.appendChild(readCheck);
+
 
     let readLabel = document.createElement('label');
     readLabel.className = "read-label"
     readLabel.htmlfor = "read";
     readLabel.appendChild(document.createTextNode("Read"));
-
-    eachBook.appendChild(readCheck);
     eachBook.appendChild(readLabel);
 
     let removeBook = document.createElement("button");
