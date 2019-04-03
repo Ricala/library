@@ -9,24 +9,6 @@ const pages = document.getElementById("pages");
 const notRead = document.getElementById("book-not-read");
 const read = document.getElementById("book-read");
 
-submitBtn.addEventListener ('click' , function () {
-  if(title.value == "" || author.value == "" || pages.value == "") {
-    alert("Please enter a value for each field");
-    return;
-  }
-
-  let isRead = false;
-  if(read.checked){
-    isRead = true;
-  }
-
-  let createdBook = new Book(title.value, author.value, pages.value, isRead);
-  addBookToLibrary(createdBook);
-  render();
-  clearInputs();
-});
-
-
 function Book(title, author, pages, read){
   this.title = title;
   this.author = author;
@@ -34,12 +16,20 @@ function Book(title, author, pages, read){
   this.read = read;
 };
 
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+}
+
 function deleteBook(book) {
-console.log("button works");
-myLibrary.splice(book, 1);
+  //confirm book removal
+let result = confirm(`Delete '${myLibrary[book].title}'?`);
+if(result){
+  myLibrary.splice(book, 1);
+}
 render();
 }
 
+//Switch read status
 function switchRead(book, read) {
   if(read){
     book.read = false;
@@ -49,11 +39,32 @@ function switchRead(book, read) {
   render();
 }
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-  console.log(book.title);
-}
 
+submitBtn.addEventListener ('click' , function () {
+  //Check that values are entered
+  if(title.value == "" || author.value == "" || pages.value == "") {
+    alert("Please enter a value for each field");
+    return;
+    //Check pages input is a number
+  } else if (isNaN(pages.value)){
+    alert("Please enter a number for pages")
+    pages.value = "";
+    return;
+    //Create new book
+  } else {
+    let isRead = false;
+    if(read.checked){
+      isRead = true;
+    }
+
+    let createdBook = new Book(title.value, author.value, pages.value, isRead);
+    addBookToLibrary(createdBook);
+    render();
+    clearInputs();
+  }
+});
+
+//clear form data
 function clearInputs() {
   title.value = "";
   author.value = "";
@@ -61,16 +72,10 @@ function clearInputs() {
   notRead.checked = true;
 }
 
-let theHobbit = new Book('dog','mom',234,true);
-let theDog = new Book('bog','mom',234,false);
-let theFog = new Book('Harry Potter and the Sorcers stone','momttmomttmomttmomttmomtt',235554,false);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theDog);
-addBookToLibrary(theFog);
-
 function render() {
   library.innerHTML = "";
   
+  //render each book in MyLibrary with title, author, pages, buttons
   for (const [index, book] of myLibrary.entries()) {
     let eachBook = document.createElement("div");
     eachBook.className = "book";
@@ -90,13 +95,10 @@ function render() {
     pages.appendChild(document.createTextNode(`${book.pages} pages`));
     eachBook.appendChild(pages);
 
-    let readBox = document.createElement('div');
-    readBox.className = "read-box";
-
-
     let readBtn = document.createElement('button');
     readBtn.className="read-btn-both";
 
+    //Assign button read or not read
     if(book.read){
       readBtn.className = "read-btn read-btn-both";
       readBtn.appendChild(document.createTextNode("READ"));
@@ -106,9 +108,10 @@ function render() {
     };
     eachBook.appendChild(readBtn);
 
+    //switch status read book
     readBtn.onclick = () => switchRead(book, book.read);
       
-
+    //delete book
     let removeBook = document.createElement("button");
     removeBook.className = "remove-btn";
     removeBook.appendChild(document.createTextNode("🗑️"));
@@ -119,4 +122,14 @@ function render() {
   }
 }
 
-render();
+function initialbooks(){
+  let theHobbit = new Book('The Lord of the Rings','J. R. R. Tolkien', 151, true);
+  let theDog = new Book('Of Mice and Men', 'John Steinbeck', 187, false);
+  let theFog = new Book('Harry Potter and the Goblet of Fire','J.K. Rowling', 796, true);
+  addBookToLibrary(theHobbit);
+  addBookToLibrary(theDog);
+  addBookToLibrary(theFog);
+  render();
+};
+
+initialbooks();
