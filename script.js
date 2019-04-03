@@ -52,7 +52,7 @@ function clearInputs() {
 
 let theHobbit = new Book('dog','mom',234,true);
 let theDog = new Book('bog','mom',234,false);
-let theFog = new Book('bog55bog55bog55bog55bog55bog55bog55bog55bog55bog55','momttmomttmomttmomttmomtt',235554,false);
+let theFog = new Book('Harry Potter and the Sorcers stone','momttmomttmomttmomttmomtt',235554,false);
 addBookToLibrary(theHobbit);
 addBookToLibrary(theDog);
 addBookToLibrary(theFog);
@@ -79,6 +79,15 @@ function render() {
     pages.appendChild(document.createTextNode(`${book.pages} pages`));
     eachBook.appendChild(pages);
 
+    let readBox = document.createElement('div');
+    readBox.className = "read-box";
+
+    let readLabel = document.createElement('label');
+    readLabel.className = "read-label"
+    readLabel.htmlfor = "read";
+    readLabel.appendChild(document.createTextNode("Read"));
+    readBox.appendChild(readLabel);
+
     let readCheck = document.createElement("INPUT");
     readCheck.className = "read-checkbox";
     readCheck.type = "checkbox";
@@ -90,14 +99,9 @@ function render() {
     } else {
       readCheck.checked = false;
     }
-    eachBook.appendChild(readCheck);
+    readBox.appendChild(readCheck);
 
-
-    let readLabel = document.createElement('label');
-    readLabel.className = "read-label"
-    readLabel.htmlfor = "read";
-    readLabel.appendChild(document.createTextNode("Read"));
-    eachBook.appendChild(readLabel);
+    eachBook.appendChild(readBox);
 
     let removeBook = document.createElement("button");
     removeBook.className = "remove-btn";

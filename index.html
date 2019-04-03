@@ -6,30 +6,30 @@
 
 <body>
   <h1>Ricala's Library</h1>
-  <div class="new-book">
-    <button class="new-book-btn">Add a new Book</button>
+  <div class="container">
+    <div class="new-book">
+      <form id="new-book-form" action="" method="post">
+        <label for="title">Book Title:</label>
+        <input type="text" name="title" id="title" maxlength="50" placeholder="Harry Potter">
+        
+        <label for="author">Author:</label> 
+        <input type="text" name="author" id="author" maxlength="25" placeholder="J.K. Rowling">
+        
+        <label for="pages">Pages:</label>
+        <input type="text" name="pages" id="pages" maxlength="6" placeholder="123">
+        
+        <div class="read-radio">
+          <label for="read">Read</label>
+          <input type="radio" name="read" id="book-read" value="read" >
+          <label for="not-read">Not Read</label>
+          <input type="radio" name="read" id="book-not-read" value="not-read" checked>
+        </div>
 
-    <form id="new-book-form" action="" method="post">
-      <label for="title">Book Title:</label>
-      <input type="text" name="title" id="title" maxlength="50" placeholder="Harry Potter">
-      
-      <label for="author">Author:</label> 
-      <input type="text" name="author" id="author" maxlength="25" placeholder="J.K. Rowling">
-      
-      <label for="pages">Pages:</label>
-      <input type="text" name="pages" id="pages" maxlength="6" placeholder="123">
-      
-      <input type="radio" name="read" id="book-read" value="read" >
-      <label for="read">Read</label>
-      <input type="radio" name="read" id="book-not-read" value="not-read" checked>
-      <label for="not-read">Not Read</label>
+        <button id="submit-btn" type="button" form="new-book-form" value="post">Add Book</button>
+      </form>
+    </div>
 
-      <button id="submit-btn" type="button" form="new-book-form" value="post">Add Book</button>
-    </form>
-
-  </div>  
-  <div class="library">
-  
+    <div class="library"></div>
   </div>
   <script src="script.js"></script>
 </body>
