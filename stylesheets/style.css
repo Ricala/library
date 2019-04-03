@@ -77,6 +77,14 @@ body {
 #new-book-form * {
   padding: 8px;
 }
+#new-book-form .read-radio {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#new-book-form .read-radio * {
+  padding: 5px 0;
+}
 
 .book {
   flex: 0 1 22%;
@@ -172,7 +180,7 @@ body {
   font-weight: 500;
   border-radius: 100%;
   border: 1px solid white;
-  padding: 0 10px;
+  padding: 0;
   background-color: rgba(255, 0, 0, 0.534);
 }
 .book .remove-btn:hover {
