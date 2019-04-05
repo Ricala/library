@@ -9,127 +9,151 @@ const pages = document.getElementById("pages");
 const notRead = document.getElementById("book-not-read");
 const read = document.getElementById("book-read");
 
-function Book(title, author, pages, read){
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-};
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
+  switchRead(read) {
+    if(read){
+      this.read = false;
+    } else{
+      this.read = true;
+    };
+  }
 }
 
-function deleteBook(book) {
-  //confirm book removal
-let result = confirm(`Delete '${myLibrary[book].title}'?`);
-if(result){
-  myLibrary.splice(book, 1);
-}
-render();
+class Library {
+  myLibrary = []
+
+  constructor() {
+    this.myLibrary = myLibrary;
+  }
+
+  addBookToLibrary(book) {
+    myLibrary.push(book)
+    this.render();
+  }
+
+  deleteBook(book) {
+    let result = confirm(`Delete '${myLibrary[book].title}'?`);
+    if(result){
+    myLibrary.splice(book, 1);
+    }
+    this.render();
+  }
+
+  render() {
+    library.innerHTML = "";
+  
+    //render each book in MyLibrary with title, author, pages, buttons
+    for (const [index, book] of myLibrary.entries()) {
+      let eachBook = document.createElement("div");
+      eachBook.className = "book";
+  
+      let title = document.createElement("h3");
+      title.className = "title";
+      title.appendChild(document.createTextNode(book.title));
+      eachBook.appendChild(title);
+  
+      let author = document.createElement("h4");
+      author.className = "author";
+      author.appendChild(document.createTextNode(book.author));
+      eachBook.appendChild(author);
+      
+      let pages = document.createElement("small");
+      pages.className = "pages";
+      pages.appendChild(document.createTextNode(`${book.pages} pages`));
+      eachBook.appendChild(pages);
+  
+      let readBtn = document.createElement('button');
+      readBtn.className="read-btn-both";
+  
+      //Assign button read or not read
+      if(book.read){
+        readBtn.className = "read-btn read-btn-both";
+        readBtn.appendChild(document.createTextNode("READ"));
+      } else{
+        readBtn.className = "not-read-btn read-btn-both";
+        readBtn.appendChild(document.createTextNode("NOT READ"));
+      };
+      eachBook.appendChild(readBtn);
+  
+      //switch status read book
+      readBtn.onclick = () => {
+        book.switchRead(book.read); 
+        this.render();
+      }
+        
+      //delete book
+      let removeBook = document.createElement("button");
+      removeBook.className = "remove-btn";
+      removeBook.appendChild(document.createTextNode("🗑️"));
+      eachBook.appendChild(removeBook);
+      removeBook.onclick = () => this.deleteBook(index);
+      
+      library.appendChild(eachBook);
+    }
+  }
 }
 
-//Switch read status
-function switchRead(book, read) {
-  if(read){
-    book.read = false;
-  } else{
-    book.read = true;
-  };
-  render();
-}
 
 
-submitBtn.addEventListener ('click' , function () {
-  //Check that values are entered
-  if(title.value == "" || author.value == "" || pages.value == "") {
-    alert("Please enter a value for each field");
-    return;
-    //Check pages input is a number
-  } else if (isNaN(pages.value)){
-    alert("Please enter a number for pages")
-    pages.value = "";
-    return;
-    //Create new book
-  } else {
-    let isRead = false;
-    if(read.checked){
-      isRead = true;
+const main = (() => {
+  let library = new Library();
+
+  let initialBooks = (() => {
+    let lotr = new Book('The Lord of the Rings','J. R. R. Tolkien', 151, true);
+    let ofMiceAndMen = new Book('Of Mice and Men', 'John Steinbeck', 187, false);
+    let harryPotter = new Book('Harry Potter and the Goblet of Fire','J.K. Rowling', 796, true);
+    library.addBookToLibrary(lotr);
+    library.addBookToLibrary(ofMiceAndMen);
+    library.addBookToLibrary(harryPotter);
+  })();
+
+  class Form {
+    constructor(library){
+      this.submitBtn;
+      this.library = library;
     }
 
-    let createdBook = new Book(title.value, author.value, pages.value, isRead);
-    addBookToLibrary(createdBook);
-    render();
-    clearInputs();
+    formHandler() {
+      submitBtn.addEventListener ('click' , function () {
+        //Check that values are entered
+        if(title.value == "" || author.value == "" || pages.value == "") {
+          alert("Please enter a value for each field");
+          return;
+          //Check pages input is a number
+        } else if (isNaN(pages.value)){
+          alert("Please enter a number for pages")
+          pages.value = "";
+          return;
+          //Create new book
+        } else {
+          let isRead = false;
+          if(read.checked){
+            isRead = true;
+          }
+          
+          let createdBook = new Book(title.value, author.value, pages.value, isRead);
+          library.addBookToLibrary(createdBook);
+          clearInputs();
+        }
+
+        function clearInputs() {
+        title.value = "";
+        author.value = "";
+        pages.value = "";
+        notRead.checked = true;
+      }
+      });
+    }
   }
-});
 
-//clear form data
-function clearInputs() {
-  title.value = "";
-  author.value = "";
-  pages.value = "";
-  notRead.checked = true;
-}
-
-function render() {
-  library.innerHTML = "";
-  
-  //render each book in MyLibrary with title, author, pages, buttons
-  for (const [index, book] of myLibrary.entries()) {
-    let eachBook = document.createElement("div");
-    eachBook.className = "book";
-
-    let title = document.createElement("h3");
-    title.className = "title";
-    title.appendChild(document.createTextNode(book.title));
-    eachBook.appendChild(title);
-
-    let author = document.createElement("h4");
-    author.className = "author";
-    author.appendChild(document.createTextNode(book.author));
-    eachBook.appendChild(author);
-    
-    let pages = document.createElement("small");
-    pages.className = "pages";
-    pages.appendChild(document.createTextNode(`${book.pages} pages`));
-    eachBook.appendChild(pages);
-
-    let readBtn = document.createElement('button');
-    readBtn.className="read-btn-both";
-
-    //Assign button read or not read
-    if(book.read){
-      readBtn.className = "read-btn read-btn-both";
-      readBtn.appendChild(document.createTextNode("READ"));
-    } else{
-      readBtn.className = "not-read-btn read-btn-both";
-      readBtn.appendChild(document.createTextNode("NOT READ"));
-    };
-    eachBook.appendChild(readBtn);
-
-    //switch status read book
-    readBtn.onclick = () => switchRead(book, book.read);
-      
-    //delete book
-    let removeBook = document.createElement("button");
-    removeBook.className = "remove-btn";
-    removeBook.appendChild(document.createTextNode("🗑️"));
-    eachBook.appendChild(removeBook);
-    removeBook.onclick = () => deleteBook(index);
-
-    library.appendChild(eachBook);
-  }
-}
-
-function initialbooks(){
-  let theHobbit = new Book('The Lord of the Rings','J. R. R. Tolkien', 151, true);
-  let theDog = new Book('Of Mice and Men', 'John Steinbeck', 187, false);
-  let theFog = new Book('Harry Potter and the Goblet of Fire','J.K. Rowling', 796, true);
-  addBookToLibrary(theHobbit);
-  addBookToLibrary(theDog);
-  addBookToLibrary(theFog);
-  render();
-};
-
-initialbooks();
+  let form = new Form();
+  form.formHandler();
+  library.render();
+})();
