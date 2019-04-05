@@ -1,7 +1,5 @@
 
-let myLibrary = [];
 const library = document.querySelector(".library");
-const submitBtn = document.getElementById("submit-btn");
 const readBtn = document.getElementsByClassName("read-btn")
 const title = document.getElementById("title");
 const author = document.getElementById("author");
@@ -18,31 +16,25 @@ class Book {
   }
 
   switchRead(read) {
-    if(read){
-      this.read = false;
-    } else{
-      this.read = true;
-    };
-  }
+    if(read) this.read = false;
+    else this.read = true;
+  };
 }
 
 class Library {
-  myLibrary = []
 
-  constructor() {
+  constructor(myLibrary) {
     this.myLibrary = myLibrary;
   }
 
   addBookToLibrary(book) {
-    myLibrary.push(book)
+    this.myLibrary.push(book)
     this.render();
   }
 
   deleteBook(book) {
-    let result = confirm(`Delete '${myLibrary[book].title}'?`);
-    if(result){
-    myLibrary.splice(book, 1);
-    }
+    let result = confirm(`Delete '${this.myLibrary[book].title}'?`);
+    if(result) this.myLibrary.splice(book, 1);
     this.render();
   }
 
@@ -50,7 +42,7 @@ class Library {
     library.innerHTML = "";
   
     //render each book in MyLibrary with title, author, pages, buttons
-    for (const [index, book] of myLibrary.entries()) {
+    for (const [index, book] of this.myLibrary.entries()) {
       let eachBook = document.createElement("div");
       eachBook.className = "book";
   
@@ -103,7 +95,9 @@ class Library {
 
 
 const main = (() => {
-  let library = new Library();
+  let emptyLibrary = [];
+  let library = new Library(emptyLibrary);
+  let submitBtn = document.getElementById("submit-btn");
 
   let initialBooks = (() => {
     let lotr = new Book('The Lord of the Rings','J. R. R. Tolkien', 151, true);
@@ -115,9 +109,8 @@ const main = (() => {
   })();
 
   class Form {
-    constructor(library){
-      this.submitBtn;
-      this.library = library;
+    constructor(){
+      this.submitBtn = submitBtn;
     }
 
     formHandler() {
@@ -134,9 +127,7 @@ const main = (() => {
           //Create new book
         } else {
           let isRead = false;
-          if(read.checked){
-            isRead = true;
-          }
+          if(read.checked)isRead = true;
           
           let createdBook = new Book(title.value, author.value, pages.value, isRead);
           library.addBookToLibrary(createdBook);
